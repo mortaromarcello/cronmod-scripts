@@ -43,6 +43,12 @@ busybox mv /data/data /sd-ext;
 busybox mkdir /data/data;
 fi;
 
+if [ ! -e /sd-ext/fota ] && [ -e /data/fota ]
+then
+busybox mv /data/fota /sd-ext;
+busybox mkdir /data/fota;
+fi;
+
 if [ ! -e /sd-ext/nvram ] && [ -e /data/nvram ] 
 then
 busybox mv /data/nvram /sd-ext;
@@ -65,6 +71,11 @@ fi;
 if [ -e /data/data ]
 then
 busybox mount -o bind /sd-ext/data /data/data;
+fi;
+
+if [ -e /data/fota ]
+then
+busybox mount -o bind /sd-ext/fota /data/fota;
 fi;
 
 if [ -e /data/nvram ]
